@@ -1,12 +1,15 @@
 //Home
 
 import React, { useState, useEffect } from "react";
-import UserService from "../services/user.service";
+//import UserService from "../services/user.service";
 import BoardService from "../services/board.service";
+import ProjectCardSmall from "./ProjectCardSmall";
 
 const ProjectBoard = () => {
-  const [content, setContent] = useState("");
+  //const [content, setContent] = useState("");
   const [flags, setFlags] = useState([]); //load from Flag service
+  const [projects, setProjects] = useState([]);
+
   /*const board = {
     columns: {
       id: "",
@@ -16,7 +19,8 @@ const ProjectBoard = () => {
   };*/
 
   useEffect(() => {
-    UserService.getPublicContent().then(
+    //used for testing
+    /*UserService.getPublicContent().then(
       (response) => {
         setContent(response.data);
       },
@@ -27,24 +31,42 @@ const ProjectBoard = () => {
           error.toString();
         setContent(_content);
       }
-    );
+    );*/
     BoardService.getFlags().then((response) => {
       setFlags(response.data);
     });
+    BoardService.getProjects().then((response) => {
+      setProjects(response.data);
+    });
   }, []);
+
+  const matchProjectWithFlag = (flag) => {
+    return projects.map((project) => {
+      if (flag && flag.id === project.flag.id) {
+        console.log("match");
+        return <ProjectCardSmall project={project} />;
+      } else {
+        return null;
+      }
+    });
+  };
 
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content}</h3>
-        <div className="container">
-          <div className="row">
-            {flags.map((flag) => (
-              <div className="col-md">{flag.name}</div>
-            ))}
-          </div>
-        </div>
+        <h3>Welcome to the Project Board</h3>
       </header>
+      <div className="container">
+        <div className="row">
+          {flags.map((flag) => (
+            <div className="col border border-dark m-1" key={flag.id}>
+              <div className="col-content text-center">{flag.name}</div>
+              {/*<ProjectCardSmall projects={projects} flag={flag} />*/}
+              {matchProjectWithFlag(flag)}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

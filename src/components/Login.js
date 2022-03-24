@@ -4,6 +4,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
+import login from "../login.jpg";
 
 const required = (value) => {
   if (!value) {
@@ -57,15 +58,20 @@ const Login = () => {
   };
   return (
     <div className="col-md-12">
-      <div className="card card-container">
+      <div className="card card-container align-items-center">
         <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          /*  src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
-          className="profile-img-card"
+          className="profile-img-card"*/
+          src={login}
+          alt={"login"}
+          height="200"
+          width="200"
+          className="rounded-circle"
         />
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="user-email">User email</label>
+            <label htmlFor="user-email">Username</label>
             <Input
               type="text"
               className="form-control"

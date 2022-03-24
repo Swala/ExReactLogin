@@ -49,11 +49,12 @@ const App = () => {
       <nav className="navbar navbar-expand navbar-dark bg-dark p-3">
         <span className="navbar-brand mb-0 h1">Exam</span>
         <div className="navbar-nav mr-auto">
-          {/*<li className="nav-item">
+          <li className="nav-item">
             <Link to={"/home"} className="nav-link">
-              Home
+              Project Board
             </Link>
           </li>
+          {/*
            {showModeratorBoard && (
             <li className="nav-item">
               <Link to={"/mod"} className="nav-link">
@@ -87,7 +88,7 @@ const App = () => {
           <div className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
+                {currentUser.firstName + " " + currentUser.lastName}
               </Link>
             </li>
             <li className="nav-item">
@@ -112,7 +113,7 @@ const App = () => {
         )}
       </nav>
 
-      <div className="container mt-3">
+      <div className="container">
         <Routes>
           <Route exact path={"/"} element={<Login />} />
           <Route exact path={"/home"} element={<ProjectBoard />} />
