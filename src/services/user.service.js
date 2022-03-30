@@ -1,14 +1,9 @@
 import axios from "axios";
 import AuthService from "./auth.service";
-import authHeader from "./authHeader";
+//import authHeader from "./authHeader";
 
 const API_URL = "http://localhost:8080/api/test/";
 
-/*
-const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem()}` }
-};
-*/
 const user = AuthService.getCurrentUser();
 
 const getPublicContent = () => {
@@ -16,7 +11,8 @@ const getPublicContent = () => {
 };
 
 const getUserBoard = () => {
-  return axios.get(API_URL + "user", { headers: authHeader() });
+  //return axios.get(API_URL + "user", { headers: authHeader() });
+  return axios.get(API_URL + "user");
 };
 
 /*
@@ -26,7 +22,8 @@ const getModeratorBoard = () => {
 
 const getAdminBoard = () => {
   console.log(user.accessToken);
-  return axios.get(API_URL + "admin", { headers: authHeader() });
+  //return axios.get(API_URL + "admin", { headers: authHeader() });
+  return axios.get(API_URL + "admin"); //HttpOnly cookies will automatically be sent along with requests
 };
 
 const UserService = {

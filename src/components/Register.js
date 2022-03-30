@@ -4,6 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import AuthService from "../services/auth.service";
+//import RoleService from "../services/role.service";
 
 const required = (value) => {
   if (!value) {
@@ -45,8 +46,17 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [roles, setRoles] = useState(["user"]);
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+
+  /*useEffect =
+    (() => {
+      //RoleService.getRoles().then((response) => {
+      //console.log(response.data);
+      setRoles(["user"]);
+    },
+    []);*/
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -68,13 +78,26 @@ const Register = (props) => {
     const lastName = e.target.value;
     setLastName(lastName);
   };
+  const onChangeRoles = () => {
+    console.log("add admin");
+    //const selectedRoles = [...e.target.value];
+    setRoles((roles) => [...roles, "admin"]);
+  };
   const handleRegister = (e) => {
     e.preventDefault();
+    //console.log(roles);
     setMessage("");
     setSuccessful(false);
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password, firstName, lastName).then(
+      AuthService.register(
+        username,
+        email,
+        password,
+        firstName,
+        lastName,
+        roles
+      ).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -158,7 +181,25 @@ const Register = (props) => {
                   validations={[required]}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group mt-4">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    name="roles"
+                    type="checkbox"
+                    value=""
+                    onChange={onChangeRoles}
+                    id="flexCheckDefault"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefault"
+                  >
+                    Add Admin Authorization
+                  </label>
+                </div>
+              </div>
+              <div className="form-group mt-3">
                 <button className="btn btn-primary btn-block">Sign Up</button>
               </div>
             </div>

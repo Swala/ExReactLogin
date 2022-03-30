@@ -44,7 +44,7 @@ const ProjectBoard = () => {
     return projects.map((project) => {
       if (flag && flag.id === project.flag.id) {
         console.log("match");
-        return <ProjectCardSmall project={project} />;
+        return <ProjectCardSmall project={project} key={project.id} />;
       } else {
         return null;
       }
