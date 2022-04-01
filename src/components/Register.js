@@ -114,6 +114,8 @@ const Register = (props) => {
         }
       );
     }
+    setUsername("");
+    setPassword("");
   };
   return (
     <div className="col-md-12">
@@ -123,7 +125,7 @@ const Register = (props) => {
           alt="profile-img"
           className="profile-img-card"
         />
-        <Form onSubmit={handleRegister} ref={form}>
+        <Form onSubmit={handleRegister} ref={form} autoComplete="off">
           {!successful && (
             <div>
               <div className="form-group">
@@ -135,6 +137,7 @@ const Register = (props) => {
                   value={username}
                   onChange={onChangeUsername}
                   validations={[required, vusername]}
+                  autoComplete="off"
                 />
               </div>
               <div className="form-group">
@@ -157,6 +160,7 @@ const Register = (props) => {
                   value={password}
                   onChange={onChangePassword}
                   validations={[required, vpassword]}
+                  autoComplete="off"
                 />
               </div>
               <div className="form-group">

@@ -43,7 +43,7 @@ const ProjectBoard = () => {
   const matchProjectWithFlag = (flag) => {
     return projects.map((project) => {
       if (flag && flag.id === project.flag.id) {
-        console.log("match");
+        //console.log("match");
         return <ProjectCardSmall project={project} key={project.id} />;
       } else {
         return null;
@@ -54,7 +54,7 @@ const ProjectBoard = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>Welcome to the Project Board</h3>
+        <h3>Project details</h3>
       </header>
       <div className="container">
         <div className="row">

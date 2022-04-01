@@ -11,18 +11,20 @@ import BoardAdmin from "./components/BoardAdmin";
 //import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
 import BoardUser from "./components/BoardUser";
+import userService from "./services/user.service";
+import ProjectCard from "./components/ProjectCard";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const logOut = () => {
     AuthService.logout().then((r) => {
       setShowAdminBoard(false);
       setCurrentUser(undefined);
+      setIsLoggedIn(false);
     });
-
-    //setShowModeratorBoard(false);
   };
 
   useEffect(() => {
@@ -30,8 +32,8 @@ const App = () => {
     if (user) {
       console.log("is admin: " + user.roles.includes("ROLE_ADMIN")); //ok
       setCurrentUser(user);
-      //setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      setIsLoggedIn(true);
     }
     EventBus.on("logout", () => {
       logOut();
@@ -88,11 +90,6 @@ const App = () => {
                 Login
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-            </li>
           </div>
         )}
       </nav>
@@ -106,6 +103,7 @@ const App = () => {
           <Route exact path="/projectboard" element={<ProjectBoard />} />
           <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/user" element={<BoardUser />} />
+          <Route path="/project/:id" element={<ProjectCard />} />
         </Routes>
       </div>
       {/*<AuthVerify logOut={logOut} />*/}
@@ -116,3 +114,8 @@ export default App;
 
 //<Route path="/user" element={<BoardUser />} />
 //<Route path="/mod" element={<BoardModerator />} />
+/*<li className="nav-item">
+  <Link to={"/register"} className="nav-link">
+    Sign Up
+  </Link>
+</li>*/

@@ -2,33 +2,10 @@
 //contains header with name, deadline, and remove button for admin
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProjectCardSmall = ({ project }) => {
-  const onClick = () => {
-    console.log("I am clickable");
-  };
-
-  /* if (projects) {
-    projects.map((project) => {
-      if (project.flag.id === flag.id) {
-        return (
-          <div
-            className="card projectCard"
-            key={project.id}
-            onClick={onClick}
-            style={{ cursor: "pointer" }}
-          >
-            <div className="card-body">
-              <h5 className="card-title">{project.name}</h5>
-              <p className="card-text">{project.deadline.substring(0, 10)}</p>
-            </div>
-          </div>
-        );
-      }
-    });
-  } else {
-    return null;
-  }*/
+  const navigate = useNavigate();
 
   return (
     <>
@@ -36,7 +13,7 @@ const ProjectCardSmall = ({ project }) => {
         <div
           className="card projectCard"
           key={project.id}
-          onClick={onClick}
+          onClick={() => navigate("/project/" + project.id)}
           style={{ cursor: "pointer" }}
         >
           <div className="card-body">
