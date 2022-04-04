@@ -10,14 +10,6 @@ const ProjectBoard = () => {
   const [flags, setFlags] = useState([]); //load from Flag service
   const [projects, setProjects] = useState([]);
 
-  /*const board = {
-    columns: {
-      id: "",
-      title: "",
-      projects: [],
-    },
-  };*/
-
   useEffect(() => {
     //used for testing
     /*UserService.getPublicContent().then(
@@ -59,7 +51,7 @@ const ProjectBoard = () => {
       <div className="container">
         <div className="row">
           {flags.map((flag) => (
-            <div className="col border border-dark m-1" key={flag.id}>
+            <div className="col border border-dark rounded m-1" key={flag.id}>
               <div className="col-content text-center">{flag.name}</div>
               {/*<ProjectCardSmall projects={projects} flag={flag} />*/}
               {matchProjectWithFlag(flag)}
