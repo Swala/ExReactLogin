@@ -45,15 +45,12 @@ const ProjectBoard = () => {
 
   return (
     <div className="container">
-      <header className="jumbotron">
-        <h3>Project details</h3>
-      </header>
+      <h3 className="text-center mt-2">Project Board</h3>
       <div className="container">
         <div className="row">
           {flags.map((flag) => (
             <div className="col border border-dark rounded m-1" key={flag.id}>
               <div className="col-content text-center">{flag.name}</div>
-              {/*<ProjectCardSmall projects={projects} flag={flag} />*/}
               {matchProjectWithFlag(flag)}
             </div>
           ))}

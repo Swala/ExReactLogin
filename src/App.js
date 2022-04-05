@@ -13,6 +13,7 @@ import EventBus from "./common/EventBus";
 import BoardUser from "./components/BoardUser";
 import userService from "./services/user.service";
 import ProjectCard from "./components/ProjectCard";
+import CreateProject from "./components/CreateProject";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -57,7 +58,7 @@ const App = () => {
           )}
           {showAdminBoard && (
             <li className="nav-item">
-              <Link to={"/create-project"} className="nav-link">
+              <Link to={"/project/add"} className="nav-link">
                 New Project
               </Link>
             </li>
@@ -104,6 +105,7 @@ const App = () => {
           <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/user" element={<BoardUser />} />
           <Route path="/project/:id" element={<ProjectCard />} />
+          <Route path="/project/add" element={<CreateProject />} />
         </Routes>
       </div>
       {/*<AuthVerify logOut={logOut} />*/}

@@ -8,6 +8,8 @@ const ProjectCard = () => {
 
   const [project, setProject] = useState({});
   const [isAdmin, setIsAdmin] = useState(undefined);
+  const [successful, setSuccessful] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     //fetch project using param (project id)
@@ -22,10 +24,34 @@ const ProjectCard = () => {
     }
   }, [params.id]);
 
+  function deleteProject() {
+    console.log("delete: " + project.id);
+    ProjectService.deleteProject(project.id).then(
+      (response) => {
+        setMessage(response.data.message);
+        setSuccessful(true);
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+      }
+    );
+  }
+
   const DeleteIfAdmin = () => {
     if (isAdmin) {
       return (
-        <button type="button" className="btn btn-danger">
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={deleteProject}
+        >
           Delete
         </button>
       );
@@ -83,6 +109,18 @@ const ProjectCard = () => {
           </div>
         </div>
       </div>
+      {message && (
+        <div>
+          <div
+            className={
+              successful ? "alert alert-success" : "alert alert-danger"
+            }
+            role="alert"
+          >
+            {message}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -17,7 +17,7 @@ const ProjectCardSmall = ({ project }) => {
           style={{ cursor: "pointer" }}
         >
           <div className="card-body">
-            <h5 className="card-title">{project.name}</h5>
+            <h6 className="card-title">{project.name}</h6>
             <p className="card-text">{project.deadline.substring(0, 10)}</p>
           </div>
         </div>
