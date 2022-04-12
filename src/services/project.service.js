@@ -29,10 +29,24 @@ const deleteProject = (id) => {
   return axios.delete(API_URL + id, config);
 };
 
+const updateProject = (id, name, deadline, description, flagId) => {
+  console.log(flagId);
+  return axios.put(
+    API_URL + id,
+    {
+      name,
+      deadline,
+      description,
+      flagId,
+    },
+    config
+  );
+};
 const ProjectService = {
   getProject,
   create,
   deleteProject,
+  updateProject,
 };
 
 export default ProjectService;

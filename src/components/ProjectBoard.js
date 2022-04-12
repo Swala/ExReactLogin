@@ -4,11 +4,13 @@ import React, { useState, useEffect } from "react";
 //import UserService from "../services/user.service";
 import BoardService from "../services/board.service";
 import ProjectCardSmall from "./ProjectCardSmall";
+import { useNavigate } from "react-router-dom";
 
 const ProjectBoard = () => {
   //const [content, setContent] = useState("");
   const [flags, setFlags] = useState([]); //load from Flag service
   const [projects, setProjects] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     //used for testing
@@ -24,9 +26,17 @@ const ProjectBoard = () => {
         setContent(_content);
       }
     );*/
-    BoardService.getFlags().then((response) => {
-      setFlags(response.data);
-    });
+    BoardService.getFlags().then(
+      (response) => {
+        setFlags(response.data);
+      },
+      (error) => {
+        console.log(error.message);
+        if (error) {
+          navigate("/login");
+        }
+      }
+    );
     BoardService.getProjects().then((response) => {
       setProjects(response.data);
     });
@@ -49,8 +59,13 @@ const ProjectBoard = () => {
       <div className="container">
         <div className="row">
           {flags.map((flag) => (
-            <div className="col border border-dark rounded m-1" key={flag.id}>
-              <div className="col-content text-center">{flag.name}</div>
+            <div
+              className="col border border-dark rounded m-1 bg-info"
+              key={flag.id}
+            >
+              <div className="col-content text-center ">
+                <h5>{flag.name}</h5>
+              </div>
               {matchProjectWithFlag(flag)}
             </div>
           ))}

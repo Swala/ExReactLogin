@@ -1,5 +1,5 @@
-import React from "react";
-//import { withRouter } from "react-router-dom";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 const parseJwt = (token) => {
   try {
@@ -8,7 +8,6 @@ const parseJwt = (token) => {
     return null;
   }
 };
-
 const AuthVerify = (props) => {
   props.history.listen(() => {
     const user = JSON.parse(localStorage.getItem("user"));

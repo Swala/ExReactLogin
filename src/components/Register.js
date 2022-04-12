@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -38,7 +38,7 @@ const vpassword = (value) => {
     );
   }
 };
-const Register = (props) => {
+const Register = ({ currentUser }) => {
   const form = useRef();
   const checkBtn = useRef();
   const [username, setUsername] = useState("");
@@ -50,13 +50,10 @@ const Register = (props) => {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
-  /*useEffect =
-    (() => {
-      //RoleService.getRoles().then((response) => {
-      //console.log(response.data);
-      setRoles(["user"]);
-    },
-    []);*/
+  /* useEffect(() => {
+    //RoleService.getRoles().then((response) => {
+    console.log(currentUser.name);
+  }, []);*/
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -117,6 +114,7 @@ const Register = (props) => {
     setUsername("");
     setPassword("");
   };
+  //if (currentUser.roles.includes("ROLE_ADMIN")) {
   return (
     <div className="col-md-12">
       <div className="card card-container">

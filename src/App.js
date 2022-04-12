@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import AuthService from "./services/auth.service";
@@ -11,7 +11,6 @@ import BoardAdmin from "./components/BoardAdmin";
 //import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
 import BoardUser from "./components/BoardUser";
-import userService from "./services/user.service";
 import ProjectCard from "./components/ProjectCard";
 import CreateProject from "./components/CreateProject";
 
@@ -100,7 +99,11 @@ const App = () => {
           <Route exact path={"/"} element={<Login />} />
           <Route exact path={"/home"} element={<ProjectBoard />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
+          <Route
+            exact
+            path="/register"
+            element={<Register currentUser={currentUser} />}
+          />
           <Route exact path="/projectboard" element={<ProjectBoard />} />
           <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/user" element={<BoardUser />} />

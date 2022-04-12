@@ -3,9 +3,11 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
 
 const ProjectCardSmall = ({ project }) => {
   const navigate = useNavigate();
+  const user = AuthService.getCurrentUser();
 
   return (
     <>
